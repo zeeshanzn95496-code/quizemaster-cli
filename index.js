@@ -1,75 +1,108 @@
+#!/usr/bin/env node
+
+
 import chalk from 'chalk';
 import { select, input } from '@inquirer/prompts';
 import { questions } from './questions.js';
+import figlet from 'figlet';
 
-// Welcome screen
-console.log(chalk.cyan.bold("\n=============================="));
-console.log(chalk.yellow.bold("       QUIZMASTER CLI"));
-console.log(chalk.cyan.bold("==============================\n"));
+console.clear();
 
-// Get player name
-const playerName = await input({
-    message: 'Enter your name:'
-});
+console.log(
+    chalk.cyan(
+        figlet.textSync("QUIZMASTER", {
+            horizontalLayout: "default"
+        })
+    )
+);
 
-console.log(chalk.green(`\nWelcome ${playerName}!`));
-console.log(chalk.white("Answer all 5 questions.\n"));
+console.log(
+    chalk.yellow.bold("\n       THE TERMINAL QUIZ CHALLENGE")
+);
 
-// Score variable
-let score = 0;
+console.log(
+    chalk.gray("\n========================================")
+);
 
-// Question loop
-for (let i = 0; i < questions.length; i++) {
+console.log(
+    chalk.green.bold("\n Welcome to QuizMaster CLI!")
+);
 
-    const currentQuestion = questions[i];
+console.log(
+    chalk.white(" Test your knowledge. Challenge yourself.")
+);
 
-    console.log(chalk.yellow(`\nQuestion ${i + 1}/5`));
+console.log(
+    chalk.gray("\n========================================\n")
+);
 
-    const userAnswer = await select({
-        message: currentQuestion.question,
-        choices: currentQuestion.choices
+async function runQuiz() {
+    // Get player name
+    const playerName = await input({
+        message: 'Enter your name:'
     });
 
-    // Check answer
-    if (userAnswer === currentQuestion.answer) {
+    console.log(chalk.green(`\nWelcome ${playerName}!`));
+    console.log(chalk.white("Answer all 5 questions.\n"));
 
-        score++;
+    // Score variable
+    let score = 0;
 
-        console.log(chalk.green("✔ Correct Answer!"));
+    // Question loop
+    for (let i = 0; i < questions.length; i++) {
+
+        const currentQuestion = questions[i];
+
+        const userAnswer = await select({
+            message: currentQuestion.question,
+            choices: currentQuestion.choices,
+
+        });
+
+        if (userAnswer === currentQuestion.answer) {
+
+            score++;
+            console.log(chalk.green("✔ Correct Answer!"));
+            if (currentQuestion.specialMessage) {
+                console.log(chalk.magenta.bold(currentQuestion.specialMessage));
+            }
+
+        } else {
+
+            console.log(chalk.red("✘ Wrong Answer!"));
+            if (currentQuestion.wrongMessage) {
+                console.log(chalk.yellow.bold(currentQuestion.wrongMessage));
+            } else {
+                console.log(chalk.yellow("Better luck next time!"));
+            }
+
+        }
+    }
+
+    // Final result comes AFTER the loop.
+
+    // Final result
+    const percentage = (score / questions.length) * 100;
+
+    console.log(chalk.cyan.bold("\n=============================="));
+    console.log(chalk.yellow.bold("         QUIZ RESULT"));
+    console.log(chalk.cyan.bold("=============================="));
+
+    console.log(chalk.white(`Player: ${playerName}`));
+    console.log(chalk.white(`Score: ${score}/${questions.length}`));
+    console.log(chalk.white(`Percentage: ${percentage}%`));
+
+    // Winner announcement
+    if (score >= 4) {
+
+        console.log(chalk.bgGreen.bold("\n🏆 CONGRATULATIONS! YOU ARE THE WINNER!"));
 
     } else {
 
-        console.log(chalk.red("✘ Wrong Answer!"));
-
-        console.log(
-            chalk.yellow(`Correct answer: ${
-                currentQuestion.choices.find(
-                    choice => choice.value === currentQuestion.answer
-                ).name
-            }`)
-        );
+        console.log(chalk.red.bold("\nBetter luck next time! Keep learning!"));
     }
+
+    console.log(chalk.cyan("\nThanks for playing QuizMaster CLI!\n"));
 }
 
-// Final result
-const percentage = (score / questions.length) * 100;
-
-console.log(chalk.cyan.bold("\n=============================="));
-console.log(chalk.yellow.bold("         QUIZ RESULT"));
-console.log(chalk.cyan.bold("=============================="));
-
-console.log(chalk.white(`Player: ${playerName}`));
-console.log(chalk.white(`Score: ${score}/${questions.length}`));
-console.log(chalk.white(`Percentage: ${percentage}%`));
-
-// Winner announcement
-if (score >= 4) {
-
-    console.log(chalk.green.bold("\n🏆 CONGRATULATIONS! YOU ARE THE WINNER!"));
-
-} else {
-
-    console.log(chalk.red.bold("\nBetter luck next time! Keep learning!"));
-}
-
-console.log(chalk.cyan("\nThanks for playing QuizMaster CLI!\n"));
+runQuiz();

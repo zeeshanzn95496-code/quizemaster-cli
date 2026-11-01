@@ -47,5 +47,17 @@ export const questions = [
             { name: "Hyper Transfer Main Language", value: "transfer" }
         ],
         answer: "html"
+    },
+      {
+        question: "Who made c++ language?",
+        choices: [
+            { name: "me", value: "me" },
+            { name: "atharva sharma", value: "atharva sharma" },
+            { name: "uzaif", value: "uzaif" },
+            { name: "rehan", value: "rehan"}
+        ],
+        answer: "me",
+        specialMessage:"bro thinks he created C++! damn! what a confidence",
+        wrongMessage:"you know that life is unfair the correct answer is me "
     }
 ];
