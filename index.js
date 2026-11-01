@@ -5,35 +5,38 @@ import chalk from 'chalk';
 import { select, input } from '@inquirer/prompts';
 import { questions } from './questions.js';
 import figlet from 'figlet';
+import gradient from 'gradient-string';
+import { rainbow } from 'gradient-string';
 
 console.clear();
 
 console.log(
-    chalk.cyan(
+    gradient.rainbow(
         figlet.textSync("QUIZMASTER", {
-            horizontalLayout: "default"
+            font:"3D-ASCII",
+            horizontalLayout: "fitted"
         })
     )
 );
 
 console.log(
-    chalk.yellow.bold("\n       THE TERMINAL QUIZ CHALLENGE")
+    gradient.pastel("\n       THE TERMINAL QUIZ CHALLENGE")
 );
 
 console.log(
-    chalk.gray("\n========================================")
+    gradient.vice("\n========================================")
 );
 
 console.log(
-    chalk.green.bold("\n Welcome to QuizMaster CLI!")
+    gradient.mind("\n Welcome to QuizMaster CLI!")
 );
 
 console.log(
-    chalk.white(" Test your knowledge. Challenge yourself.")
+    gradient.mind(" Test your knowledge. Challenge yourself.")
 );
 
 console.log(
-    chalk.gray("\n========================================\n")
+    gradient.vice("\n========================================\n")
 );
 
 async function runQuiz() {
@@ -72,10 +75,7 @@ async function runQuiz() {
             console.log(chalk.red("✘ Wrong Answer!"));
             if (currentQuestion.wrongMessage) {
                 console.log(chalk.yellow.bold(currentQuestion.wrongMessage));
-            } else {
-                console.log(chalk.yellow("Better luck next time!"));
             }
-
         }
     }
 
@@ -107,7 +107,7 @@ async function runQuiz() {
     else{
         console.log("Worst performance skill issue")
     }
-    console.log(chalk.bgBlueBright("Thanks for playing best of luck for your future<3"))
+    console.log(gradient.rainbow("Thanks for playing best of luck for your future<3"))
 }
 
 
