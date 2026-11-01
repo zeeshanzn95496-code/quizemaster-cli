@@ -97,12 +97,18 @@ async function runQuiz() {
 
         console.log(chalk.bgGreen.bold("\n🏆 CONGRATULATIONS! YOU ARE THE WINNER!"));
 
-    } else {
+    } else if(score>=3) {
 
-        console.log(chalk.red.bold("\nBetter luck next time! Keep learning!"));
+        console.log(chalk.red.bold("\nKeep learning! you're in middle"));
+    }else if(score>=2){
+
+    console.log(chalk.cyan("\nneed improvement!\n"));
     }
-
-    console.log(chalk.cyan("\nThanks for playing QuizMaster CLI!\n"));
+    else{
+        console.log("Worst performance skill issue")
+    }
+    console.log(chalk.bgBlueBright("Thanks for playing best of luck for your future<3"))
 }
+
 
 runQuiz();
