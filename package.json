@@ -1,0 +1,25 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000C\u0000L\u0000I\u0000 \u0000T\u0000o\u0000o\u0000l\u0000 \u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeeshanzn95496-code/cli-tool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/zeeshanzn95496-code/cli-tool/issues"
+  },
+  "homepage": "https://github.com/zeeshanzn95496-code/cli-tool#readme",
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.5",
+    "chalk": "^6.0.1"
+  }
+}
